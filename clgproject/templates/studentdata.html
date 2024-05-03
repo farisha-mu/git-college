@@ -1,0 +1,122 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Student Data</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            
+        }
+        .navbar {
+        overflow: hidden;
+        background-color: #333;
+        padding: 10px 20px; /* Add padding to the navbar */
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+    }
+
+    .navbar-brand {
+        color: #fff;
+        text-decoration: none;
+        font-size: 24px;
+    }
+
+    .navbar a {
+        color: #f2f2f2;
+        text-decoration: none;
+        padding: 14px 20px;
+    }
+
+    .navbar a:hover {
+        background-color: #ddd;
+        color: black;
+    }
+
+        .container {
+            margin-top: 70px; /* Adjusted margin-top to make space for navbar */
+        }
+        th, td {
+            text-align: center;
+            vertical-align: middle;
+        }
+        img {
+            width: 150px;
+        }
+        .btn {
+            padding: 5px 10px;
+            margin-right: 5px;
+        }
+        body {
+        background-image: url("{% static 'images/hh.jpg' %}");/* Replace 'path_to_your_image.jpg' with the actual path to your background image */
+        background-size: cover;
+    
+        background-repeat: no-repeat;
+    }
+    </style>
+</head>
+<body>
+    <header>
+            <div class="navbar">
+              <a href="#" class="navbar-brand">Your Brand</a>
+              <a href="addcourse">ADD COURSE</a>
+              <a href="addstudent">ADD STUDENT</a>
+              <a href="addfacualtyadmin">ADD FACULTY</a> <!-- Corrected spelling from "FACUALTY" to "FACULTY" -->
+              <a href="showstudentdata">STUDENT DATA</a>
+              <a href="showteacherdata">FACULTY DATA</a>
+              <a href="{% url 'home' %}">HOME</a> <!-- Added "See All" link -->
+          </div>
+        </nav>
+    </header>
+    
+    <div class="container mt-5">
+        <table class="table table-hover table-bordered">
+            <thead class="thead-dark">
+                <tr>
+                    <th scope="col">ID</th>
+                    <th scope="col">FIRST NAME</th>
+                    <th scope="col">LAST NAME</th>
+                    <th scope="col">PHONE</th>
+                    <th scope="col">EMAIL</th>
+                    <th scope="col">COURSE</th>
+                    <th scope="col">IMAGE</th>
+                    <th scope="col">EDIT/DELETE</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for i in c_data %}
+                <tr>
+                    <td>{{ forloop.counter }}</td>
+                    <td>{{ i.first_name }}</td>
+                    <td>{{ i.last_name }}</td>
+                    <td>{{ i.phone }}</td>
+                    <td>{{ i.email }}</td>
+                    <td>{{ i.course_fk.course_name }}</td>
+                    <td>
+                        {% if i.image %}
+                        <img src="{{ i.image.url }}">
+                        {% else %}
+                        <img src="{% static 'images/g1.jpg' %}">
+                        {% endif %}
+                    </td>
+                    <td>
+                        <form action="{% url 'student_update' student_id=i.id %}" method="GET" style="display: inline;">
+                            <button type="submit" class="btn btn-info">EDIT</button>
+                        </form>
+                        <form action="{% url 'student_delete' student_id=i.id %}" method="POST" style="display: inline;">
+                            {% csrf_token %}
+                            <button type="submit" class="btn btn-danger">DELETE</button>
+                        </form>
+                    </td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+</body>
+</html>

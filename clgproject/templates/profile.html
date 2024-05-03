@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Teacher Profile</title>
+</head>
+<body>
+    <h1>Profile</h1>
+    <li><strong>Image:</strong> <img src="{{ teacher_profile.image.url }}" alt="Teacher Image"></li>
+    <li><strong>First Name:</strong> {{ teacher_profile.user.first_name }}</li>
+    <li><strong>Last Name:</strong> {{ teacher_profile.user.last_name }}</li>
+    <li><strong>Email:</strong> {{ teacher_profile.user.email }}</li>
+    <li><strong>Phone Number:</strong> {{ teacher_profile.phnone }}</li>
+    <li><strong>Course:</strong> {{ teacher_profile.course_fk.course_name }}</li>
+
+    <td>
+        <a href="{% url 'edit_teacher_profile' %}" class="btn btn-info">EDIT</a>
+        <form method="POST" action="{% url 'delete_teacher_profile' %}">
+            {% csrf_token %}
+            <button type="submit" class="btn btn-danger">DELETE</button>
+        </form>
+      </td>
+</body>
+</html>

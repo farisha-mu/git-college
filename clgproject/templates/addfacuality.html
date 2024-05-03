@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <form action="{% url 'addfacualtyadmin' %}" method="post" enctype="multipart/form-data">
+        {% csrf_token %}
+
+
+        <input placeholder="first name" name="f_name"><br><br>
+        <input placeholder="last name" name="l_name"><br><br>
+        <input placeholder="phone number" name="num"><br><br>
+        <input placeholder="email" name="email"><br><br>
+        <select name="select">
+            {% for i in c_data %}
+            <option value="{{i.id}}">{{i.course_name}}</option>
+            {% endfor %}
+        </select><br><br>
+        <input placeholder="username" name="uname"><br><br>
+        <input placeholder="password" name="pwd"><br><br>
+        <input placeholder="confirm password" name="cpwd"><br><br>
+        <input type="file" name="img" accept="image/*"><br><br>
+        <button type="submit">ADD</button>
+
+    </form>
+
+</body>
+</html>

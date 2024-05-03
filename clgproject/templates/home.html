@@ -1,0 +1,59 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Navbar with Background Image</title>
+    <style>
+        /* Style for the navbar */
+        .navbar {
+            background-color: #333; /* Background color of the navbar */
+            overflow: hidden;
+        }
+
+        /* Style for the links in the navbar */
+        .navbar a {
+            float: right;
+            display: block;
+            color: white; /* Text color of the links */
+            text-align: center;
+            padding: 14px 20px; /* Padding around the links */
+            text-decoration: none;
+        }
+
+        /* Style for the active link */
+        .navbar a.active {
+            background-color: #ddd; /* Background color of the active link */
+            color: black; /* Text color of the active link */
+        }
+
+        /* Style for the background image */
+        body {
+            background-image: url("{% static 'images/clg.jpg' %}"); /* Path to the background image */
+            background-size: cover; /* Cover the entire viewport with the background image */
+        /* Center the background image */
+            margin: 0; /* Remove default margin */
+            font-family: Arial, sans-serif; /* Specify a font family */
+        }
+
+        /* Style for the container */
+        .container {
+            padding: 20px; /* Add padding to the container */
+        }
+    </style>
+</head>
+<body>
+
+<div class="navbar">
+    <a href="{% url 'tregister' %}">REGISTER</a>
+    <a href="{% url 'login' %}">LOGIN</a>
+    <a href="{% url 'home' %}">HOME</a>
+</div>
+
+<div class="container">
+    <!-- Content of your page goes here -->
+</div>
+
+</body>
+</html>

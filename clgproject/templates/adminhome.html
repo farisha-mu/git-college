@@ -1,0 +1,63 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Navbar with Links</title>
+<style>
+    /* Basic CSS for navbar */
+    body {
+        margin: 0;
+        padding: 0;
+    }
+
+    .navbar {
+        overflow: hidden;
+        background-color: #333;
+        padding: 10px 20px; /* Add padding to the navbar */
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+    }
+
+    .navbar-brand {
+        color: #fff;
+        text-decoration: none;
+        font-size: 24px;
+    }
+
+    .navbar a {
+        color: #f2f2f2;
+        text-decoration: none;
+        padding: 14px 20px;
+    }
+
+    .navbar a:hover {
+        background-color: #ddd;
+        color: black;
+    }
+
+    /* Background image */
+    body {
+        background-image: url("{% static 'images/hh.jpg' %}");/* Replace 'path_to_your_image.jpg' with the actual path to your background image */
+        background-size: cover;
+    
+        background-repeat: no-repeat;
+    }
+</style>
+</head>
+<body>
+
+<div class="navbar">
+    <a href="#" class="navbar-brand">Your Brand</a>
+    <a href="addcourse">ADD COURSE</a>
+    <a href="addstudent">ADD STUDENT</a>
+    <a href="addfacualtyadmin">ADD FACULTY</a> <!-- Corrected spelling from "FACUALTY" to "FACULTY" -->
+    <a href="showstudentdata">STUDENT DATA</a>
+    <a href="showteacherdata">FACULTY DATA</a>
+    <a href="{% url 'home' %}">HOME</a> <!-- Added "See All" link -->
+</div>
+
+</body>
+</html>

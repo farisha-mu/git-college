@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Delete Faculty/Admin</title>
+</head>
+<body>
+    <h1>Are you sure you want to delete {{ faculty_admin.user.first_name }} {{ faculty_admin.user.last_name }}?</h1>
+    <form action="{% url 'delete_faculty_admin' faculty_admin_id=faculty_admin.id %}" method="post">
+        {% csrf_token %}
+        <button type="submit">Yes, delete</button>
+        <a href="{% url 'showteacherdata' %}" class="btn btn-secondary">Cancel</a>
+    </form>
+</body>
+</html>

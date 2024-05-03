@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Edit Student</title>
+</head>
+<body>
+    <form action="{% url 'student_edit' student_id=student.id %}" method="post" enctype="multipart/form-data">
+        {% csrf_token %}
+        <input type="hidden" name="student_id" value="{{ student.id }}">
+        
+        <input placeholder="first name" name="f_name" value="{{ student.first_name }}"><br><br>
+        <input placeholder="last name" name="l_name" value="{{ student.last_name }}"><br><br>
+        <input placeholder="phone number" name="num" value="{{ student.phone }}"><br><br>
+        <input placeholder="email" name="email" value="{{ student.email }}"><br><br>
+        <select name="select">
+            {% for course in courses %}
+                <option value="{{ course.id }}" {% if course.id == student.course_fk.id %} selected {% endif %}>
+                    {{ course.course_name }}
+                </option>
+            {% endfor %}
+        </select><br><br>
+        
+        {% if student.image %}
+        <img src="{{ student.image.url }}" alt="Current Image"><br><br>
+        {% endif %}
+        
+        <input type="file" name="img" accept="image/*"><br><br>
+        <button type="submit">Update</button>
+    </form>
+</body>
+</html>

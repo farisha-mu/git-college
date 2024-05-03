@@ -1,0 +1,58 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <div class="container mt-5">
+        <table class="table table-hover table-bordered">
+            <thead class="thead-dark">
+              <tr>
+                <th scope="col">ID</th>
+                <th scope="col">FIRST NAME</th>
+                <th scope="col">LAST NAME</th>
+                <th scope="col">USER NAME</th>
+                <th scope="col">PHONE</th>
+                <th scope="col">EMAIL</th>
+                <th scope="col">COURSE</th>
+                <th scope="col">IMAGE</th>
+                <th scope="col">EDIT/DELETE</th>
+              </tr>
+            </thead>
+            <tbody>
+                {% for i in c_data %}
+              <tr>
+                <th>{{forloop.counter}}</th>
+                <th>{{i.user.first_name}}</th>
+                <th>{{i.user.last_name}}</th>
+                <th>{{i.user.username}}</th>
+                <th>{{i.phone}}</th>
+                <th>{{i.user.email}}</th>
+                <th>{{i.course_fk.course_name}}</th>
+                <th>
+                {% if i.image %}
+                    <img style ="width:150px;" src="{{ i.image.url }}">
+                  
+                {% else %}  
+                    <img    style ="width:75px;" src="{% static 'images/g1.jpg' %}">
+                {% endif %} 
+               </th>
+                
+                <td>
+                  <a href="{% url 'edit_faculty_admin' faculty_admin_id=i.id %}" class="btn btn-info">EDIT</a>
+                  <a href="{% url 'delete_faculty_admin' faculty_admin_id=i.id %}" class="btn btn-danger">DELETE</a>
+                  
+                </td>
+               
+              </tr>
+              {% endfor %}
+            </tbody>
+          </table>
+    </div>
+    
+    
+</body>
+</html>

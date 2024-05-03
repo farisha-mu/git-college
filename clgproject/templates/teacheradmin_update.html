@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Edit Faculty/Admin</title>
+</head>
+<body>
+    <form action="{% url 'edit_faculty_admin' faculty_admin_id=faculty_admin.id %}" method="post" enctype="multipart/form-data">
+        {% csrf_token %}
+        <input type="text" placeholder="First Name" name="f_name" value="{{ faculty_admin.user.first_name }}"><br><br>
+        <input type="text" placeholder="Last Name" name="l_name" value="{{ faculty_admin.user.last_name }}"><br><br>
+        <input type="email" placeholder="Email" name="email" value="{{ faculty_admin.user.email }}"><br><br>
+        <input type="text" placeholder="Phone Number" name="num" value="{{ faculty_admin.phnone }}"><br><br>
+        <input type="text" placeholder="Username" name="uname" value="{{ faculty_admin.user.username }}"><br><br>
+        <input type="password" placeholder="Password" name="pwd"><br><br>
+        <input type="password" placeholder="Confirm Password" name="cpwd"><br><br>
+        <select name="select">
+            {% for course in c_data %}
+                <option value="{{ course.id }}" {% if course.id == faculty_admin.course_fk.id %} selected {% endif %}>
+                    {{ course.course_name }}
+                </option>
+            {% endfor %}
+        </select><br><br>
+        {% if faculty_admin.image %}
+            <img src="{{ faculty_admin.image.url }}" alt="Current Image"><br><br>
+        {% endif %}
+        <input type="file" name="img" accept="image/*"><br><br>
+        <button type="submit">Update</button>
+    </form>
+</body>
+</html>
